@@ -58,6 +58,6 @@ func holePunchConnect(ctx context.Context, host host.Host, pi peer.AddrInfo, isC
 		log.Debugw("hole punch attempt with peer failed", "peer ID", pi.ID, "error", err)
 		return err
 	}
-	log.Debugw("hole punch successful", "peer", pi.ID)
+	// log.Debugw("hole punch successful", "peer", pi.ID)
 	return nil
 }

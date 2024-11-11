@@ -197,7 +197,8 @@ func (s *Service) incomingHolePunch(str network.Stream) (rtt time.Duration, remo
 		obsDial = s.filter.FilterRemote(str.Conn().RemotePeer(), obsDial)
 	}
 
-	log.Debugw("received hole punch request", "peer", str.Conn().RemotePeer(), "addrs", obsDial)
+	// log.Debugw("received hole punch request", "peer", str.Conn().RemotePeer(), "addrs", obsDial)
+	log.Debugw("received hole punch request", "peer", str.Conn().RemotePeer())
 	if len(obsDial) == 0 {
 		return 0, nil, nil, errors.New("expected CONNECT message to contain at least one address")
 	}

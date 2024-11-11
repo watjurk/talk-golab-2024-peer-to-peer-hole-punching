@@ -32,7 +32,7 @@ var dhtReadMessageTimeout = 10 * time.Second
 // ErrReadTimeout is an error that occurs when no message is read within the timeout period.
 var ErrReadTimeout = fmt.Errorf("timed out reading response")
 
-var logger = logging.Logger("dht")
+var logger = logging.Logger("dht-manager")
 
 // messageSenderImpl is responsible for sending requests and messages to peers efficiently, including reuse of streams.
 // It also tracks metrics for sent requests and messages.

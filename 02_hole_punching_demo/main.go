@@ -5,7 +5,6 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"math/rand"
 	"os"
 	"os/signal"
 	"slices"
@@ -25,10 +24,11 @@ import (
 const PRINT_MESSAGE_PROTOCOL_ID protocol.ID = "/watjurk/print_message"
 
 func main() {
-	setupLoggingForTheTalk()
-
 	connectToID := flag.String("connect-to", "", "The ID of the hosts that this node should connect to")
+	dhtTerminalOutput := flag.String("dht-out", "stdout", "The file/tty where the dht logs should go")
 	flag.Parse()
+
+	setupLoggingForTheTalk(*dhtTerminalOutput)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -46,8 +46,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	rand.Seed(3)
 
 	// Kad-dht comes with a list of bootstrapping peers.
 	dhtRouting, err := dht.New(ctx, basicHost, dht.BootstrapPeersFunc(dht.GetDefaultBootstrapPeerAddrInfos))

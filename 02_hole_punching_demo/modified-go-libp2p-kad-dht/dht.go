@@ -44,11 +44,14 @@ const tracer = tracing.Tracer("go-libp2p-kad-dht")
 const dhtName = "IpfsDHT"
 
 var (
-	logger     = logging.Logger("dht")
+	logger     = logging.Logger("dht").WithOptions()
 	baseLogger = logger.Desugar()
 
 	rtFreezeTimeout = 1 * time.Minute
 )
+
+var LoggerOverwrite = &logger
+var LoggerBaseLogger = &baseLogger
 
 const (
 	// BaseConnMgrScore is the base of the score set on the connection

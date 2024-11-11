@@ -367,7 +367,7 @@ func (rf *relayFinder) findNodes(ctx context.Context, peerSourceRateLimiter <-ch
 				peerChan = nil
 				continue
 			}
-			log.Debugw("found node", "id", pi.ID)
+			// log.Debugw("found node", "id", pi.ID)
 			rf.candidateMx.Lock()
 			numCandidates := len(rf.candidates)
 			backoffStart, isOnBackoff := rf.backoff[pi.ID]
@@ -433,7 +433,7 @@ func (rf *relayFinder) handleNewNode(ctx context.Context, pi peer.AddrInfo) (add
 	defer cancel()
 	supportsV2, err := rf.tryNode(ctx, pi)
 	if err != nil {
-		log.Debugf("node %s not accepted as a candidate: %s", pi.ID, err)
+		// log.Debugf("node %s not accepted as a candidate: %s", pi.ID, err)
 		if err == errProtocolNotSupported {
 			rf.metricsTracer.CandidateChecked(false)
 		}
@@ -446,7 +446,7 @@ func (rf *relayFinder) handleNewNode(ctx context.Context, pi peer.AddrInfo) (add
 		rf.candidateMx.Unlock()
 		return false
 	}
-	log.Debugw("node supports relay protocol", "peer", pi.ID, "supports circuit v2", supportsV2)
+	// log.Debugw("node supports relay protocol", "peer", pi.ID, "supports circuit v2", supportsV2)
 	rf.addCandidate(&candidate{
 		added:           rf.conf.clock.Now(),
 		ai:              pi,
